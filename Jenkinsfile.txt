@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+    stages {
+        stage('Example clean') {
+            steps {
+                sh "rm -rf firstSpringBootDemo"
+                sh "git clone https://github.com/harikamisetty/firstSpringBootDemo.git"
+                sh "mvn clean -f firstSpringBootDemo"
+            }
+        }
+        stage('Example install') {
+            steps {
+                sh "mvn install -f firstSpringBootDemo"
+            }
+        }
+        stage('Example test') {
+            steps {
+                sh "mvn test -f firstSpringBootDemo"
+            }
+        }
+        stage('Example package') {
+            steps {
+                sh "mvn package -f firstSpringBootDemo"
+            }
+        }
+    }
+}
